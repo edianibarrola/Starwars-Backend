@@ -15,10 +15,16 @@ favorites_starships = db.Table('user_starships', db.Model.metadata,
     db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
     db.Column('starships_id', db.Integer, db.ForeignKey('starships.id'), primary_key=True)
 )
+favorites_vehicles = db.Table('user_vehicles', db.Model.metadata,
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
+    db.Column('starships_id', db.Integer, db.ForeignKey('vehicles.id'), primary_key=True)
+)
 
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(120), unique=True, nullable=False)
+    last_name = db.Column(db.String(120), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     username = db.Column(db.String(80), unique=False, nullable=False) 
     password = db.Column(db.String(80), unique=False, nullable=False)
@@ -26,15 +32,19 @@ class User(db.Model):
     people = db.relationship("Person", secondary=favorites_people)
     planets = db.relationship("Planet", secondary=favorites_planets)
     starships = db.relationship("Starship", secondary=favorites_starships)
+    vehicles = db.relationship("Vehicle", secondary=favorites_vehicles)
 
     def __repr__(self):
-        return '<User %r>' % self.name
+        return '<User %r>' % self.first_name
 
     def serialize(self):
         return {
             "id": self.id,
             "email": self.email,
-            "favorite_people": list(map(lambda x: x.serialize(), self.people))
+            "favorite_people": list(map(lambda x: x.serialize(), self.people)),
+            "favorite_planets": list(map(lambda x: x.serialize(), self.planets)),
+            "favorite_starships": list(map(lambda x: x.serialize(), self.starships)),
+            "favorite_vehicles": list(map(lambda x: x.serialize(), self.vehicles))
         }
 
 class Person(db.Model):
@@ -66,7 +76,7 @@ class Person(db.Model):
             
         }
 
-class Planet(db.model):
+class Planet(db.Model):
     __tablename__='planets'
     id= db.Column(db.Integer, primary_key=True)
     # ----------------------------------------------------------------
