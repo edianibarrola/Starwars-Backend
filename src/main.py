@@ -31,13 +31,23 @@ def sitemap():
     return generate_sitemap(app)
 
 @app.route('/user', methods=['GET'])
-def handle_hello():
-
+def get_all_users():
+    all_users = User.query.all()
+    all_users = list(map(lambda x: x.serialize(), all_users))
     response_body = {
-        "msg": "Hello, this is your GET /user response "
+        "msg": "Here are all of the users."
     }
+    return jsonify(all_users), 200
 
-    return jsonify(response_body), 200
+@app.route('/user/<int:id>', methods=['GET'])
+def get_one_user(id):
+    user_info = User.query.get(id).serialize()
+    
+    response_body = {
+        "msg": "Here is the selected user.",
+        "User": user_info
+    }
+    return jsonify(user_info), 200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
