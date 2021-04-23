@@ -1,4 +1,5 @@
 {
 "python.pythonPath": "${workspaceFolder}/.venv/bin/python3.6",
-"python.linting.pylintEnabled": true
+"python.linting.pylintEnabled": true,
+"editor.autoSave": "off"
 }
