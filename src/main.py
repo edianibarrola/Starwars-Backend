@@ -30,6 +30,8 @@ def handle_invalid_usage(error):
 def sitemap():
     return generate_sitemap(app)
 
+# --------------User Routes---------------
+
 @app.route('/user', methods=['GET'])
 def get_all_users():
     all_users = User.query.all()
@@ -48,6 +50,87 @@ def get_one_user(id):
         "User": user_info
     }
     return jsonify(user_info), 200
+
+# --------------People Routes---------------
+
+@app.route('/person', methods=['GET'])
+def get_all_people():
+    all_people = Person.query.all()
+    all_people = list(map(lambda x: x.serialize(), all_people))
+    response_body = {
+        "msg": "Here are all of the People."
+    }
+    return jsonify(all_people), 200
+
+@app.route('/person/<int:id>', methods=['GET'])
+def get_one_person(id):
+    person_info = Person.query.get(id).serialize()
+    
+    response_body = {
+        "msg": "Here is the selected user.",
+        "User": person_info
+    }
+    return jsonify(person_info), 200
+# --------------Planet Routes---------------
+
+@app.route('/planet', methods=['GET'])
+def get_all_planets():
+    all_planets = Planet.query.all()
+    all_planets = list(map(lambda x: x.serialize(), all_planets))
+    response_body = {
+        "msg": "Here are all of the People."
+    }
+    return jsonify(all_planets), 200
+
+@app.route('/planet/<int:id>', methods=['GET'])
+def get_one_planet(id):
+    planet_info = Planet.query.get(id).serialize()
+    
+    response_body = {
+        "msg": "Here is the selected Planet.",
+        "User": planet_info
+    }
+    return jsonify(planet_info), 200
+# --------------Vehicle Routes---------------
+
+@app.route('/vehicle', methods=['GET'])
+def get_all_vehicles():
+    all_vehicles = Person.query.all()
+    all_vehicles = list(map(lambda x: x.serialize(), all_vehicles))
+    response_body = {
+        "msg": "Here are all of the vehicles."
+    }
+    return jsonify(all_vehicles), 200
+
+@app.route('/vehicle/<int:id>', methods=['GET'])
+def get_one_vehicle(id):
+    vehicle_info = Vehicle.query.get(id).serialize()
+    
+    response_body = {
+        "msg": "Here is the selected Vehicle.",
+        "User": vehicle_info
+    }
+    return jsonify(vehicle_info), 200
+# --------------Starship Routes---------------
+
+@app.route('/starship', methods=['GET'])
+def get_all_starships():
+    all_starships = Starship.query.all()
+    all_starships = list(map(lambda x: x.serialize(), all_starships))
+    response_body = {
+        "msg": "Here are all of the Starships."
+    }
+    return jsonify(all_people), 200
+
+@app.route('/starship/<int:id>', methods=['GET'])
+def get_one_starship(id):
+    starship_info = Starship.query.get(id).serialize()
+    
+    response_body = {
+        "msg": "Here is the selected Starship.",
+        "User": starship_info
+    }
+    return jsonify(starship_info), 200
 
 # this only runs if `$ python src/main.py` is executed
 if __name__ == '__main__':
