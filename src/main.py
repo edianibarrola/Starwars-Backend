@@ -56,11 +56,13 @@ def login():
     return jsonify(access_token=access_token)
 
 @app.route('/user', methods=['GET'])
+# @jwt_required()
 def get_all_users():
     all_users = User.query.all()
     all_users = list(map(lambda x: x.serialize(), all_users))
     response_body = {
-        "msg": "Here are all of the users."
+        "msg": "Here are all of the users.",
+        "users": all_users
     }
     return jsonify(all_users), 200
 
@@ -143,7 +145,7 @@ def get_all_starships():
     response_body = {
         "msg": "Here are all of the Starships."
     }
-    return jsonify(all_people), 200
+    return jsonify(all_starships), 200
 
 @app.route('/starship/<int:id>', methods=['GET'])
 def get_one_starship(id):

@@ -41,6 +41,9 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
+            "first_name":self.first_name,
+            "last_name":self.last_name,
+            "username":self.username,
             "favorite_people": list(map(lambda x: x.serialize(), self.people)),
             "favorite_planets": list(map(lambda x: x.serialize(), self.planets)),
             "favorite_starships": list(map(lambda x: x.serialize(), self.starships)),
@@ -72,7 +75,15 @@ class Person(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "homeworld": self.homeworld.name
+            "homeworld": self.homeworld.name,
+            "height": self.height,
+            "mass": self.mass,
+            "hair_color": self.hair_color,
+            "skin_color": self.skin_color,
+            "eye_color": self.eye_color,
+            "birth_year": self.birth_year,
+            "gender": self.gender,
+            "photo_url": self.photo_url
             
         }
 
@@ -101,7 +112,15 @@ class Planet(db.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "name": self.name
+            "name": self.name,
+            "diameter": self.diameter,
+            "rotation_period": self.rotation_period,
+            "gravity": self.gravity,
+            "population": self.population,
+            "climate":self.climate,
+            "terrain": self.terrain,
+            "surface_water": self.surface_water,
+            "photo_url": self.photo_url
         }
 
 class Starship(db.Model):
@@ -129,7 +148,19 @@ class Starship(db.Model):
     def serialize(self):
         return{
             "id": self.id,
-            "name": self.name
+            "name": self.name,
+            "model":self.model,
+            "starship_class": self.starship_class,
+            "manufacturer": self.manufacturer,
+            "cost_in_credits": self.cost_in_credits,
+            "length":self.length,
+            "crew": self.crew,
+            "passengers": self.passengers,
+            "max_atmosphering_speed": self.max_atmosphering_speed,
+            "hyperdrive_rating": self.hyperdrive_rating,
+            "MGLT": self.MGLT,
+            "cargo_capactiy": self.cargo_capacity,
+            "photo_url": self.photo_url
         }    
 
 class Vehicle(db.Model):
@@ -155,5 +186,15 @@ class Vehicle(db.Model):
     def serialize(self):
         return{
             "id": self.id,
-            "name": self.name
+            "name": self.name,
+            "model": self.model,
+            "manufacturer": self.manufacturer,
+            "cost_in_credits": self.cost_in_credits,
+            "length": self.length,
+            "crew": self.crew,
+            "passengers":self.passengers,
+            "max_atmosphering_speed": self.max_atmosphering_speed,
+            "cargo_capactiy": self.cargo_capacity,
+            "consumables": self.consumables,
+            "photo_url":self.photo_url
         }    
