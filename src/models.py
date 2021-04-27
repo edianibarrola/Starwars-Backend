@@ -66,7 +66,7 @@ class Person(db.Model):
     birth_year = db.Column(db.String(50))
     gender = db.Column(db.String(50))
     name = db.Column(db.String(50), nullable=False)
-    photo_url: db.Column(db.String)  
+    photo_url = db.Column(db.String(250)) 
 
     def __repr__(self):
         return '<Person %r>' % self.name
@@ -104,7 +104,7 @@ class Planet(db.Model):
     terrain = db.Column(db.String(50))
     surface_water = db.Column(db.String(50))
     name = db.Column(db.String(50), nullable=False)
-    photo_url: db.Column(db.String)
+    photo_url= db.Column(db.String(250))
 
     def __repr__(self):
         return '<Planet %r>' % self.name
@@ -140,7 +140,7 @@ class Starship(db.Model):
     cargo_capacity = db.Column(db.String(50))
     consumables = db.Column(db.String(50))
     name = db.Column(db.String(50), nullable=False)
-    photo_url: db.Column(db.String)
+    photo_url= db.Column(db.String(250))
 
     def __repr__(self):
         return '<Starship %r>' % self.name
@@ -178,7 +178,7 @@ class Vehicle(db.Model):
     cargo_capacity = db.Column(db.String(50))
     consumables = db.Column(db.String(50))
     name = db.Column(db.String(50), nullable=False)
-    photo_url: db.Column(db.String)
+    photo_url= db.Column(db.String(250))
 
     def __repr__(self):
         return '<Vehicle %r>' % self.name
