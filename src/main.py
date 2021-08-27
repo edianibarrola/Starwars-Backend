@@ -8,7 +8,7 @@ from flask_swagger import swagger
 from flask_cors import CORS
 from utils import APIException, generate_sitemap
 from admin import setup_admin
-from models import db, User, Person, Planet, Starship
+from models import db, User, Person, Planet, Starship, Vehicle
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
@@ -120,7 +120,7 @@ def get_one_planet(id):
 
 @app.route('/vehicle', methods=['GET'])
 def get_all_vehicles():
-    all_vehicles = Person.query.all()
+    all_vehicles = Vehicle.query.all()
     all_vehicles = list(map(lambda x: x.serialize(), all_vehicles))
     response_body = {
         "msg": "Here are all of the vehicles."
